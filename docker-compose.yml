@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    image: manimcommunity/manim
+    working_dir: /manim
+    volumes:
+      - ./:/manim
+
+    command: "manim example.py OpeningManim"
+
+volumes:
+    manim-share:
