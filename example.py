@@ -72,3 +72,48 @@ class OpeningManim(Scene):
         self.wait()
         self.play(Transform(grid_title, grid_transform_title))
         self.wait()
+
+class PointMovingOnShapes(Scene):
+    def construct(self):
+        circle = Circle(radius=1, color=BLUE)
+        dot = Dot()
+        dot2 = dot.copy().shift(RIGHT)
+        self.add(dot)
+
+        line = Line([3, 0, 0], [5, 0, 0])
+        self.add(line)
+
+        self.play(GrowFromCenter(circle))
+        self.play(Transform(dot, dot2))
+        self.play(MoveAlongPath(dot, circle), run_time=2, rate_func=linear)
+        self.play(Rotating(dot, about_point=[2, 0, 0]), run_time=1.5)
+        self.wait()
+
+class MovingFrameBox(Scene):
+    def construct(self):
+        text=MathTex(
+            "\\frac{d}{dx}f(x)g(x)=","f(x)\\frac{d}{dx}g(x)","+",
+            "g(x)\\frac{d}{dx}f(x)"
+        )
+        self.play(Write(text))
+        framebox1 = SurroundingRectangle(text[1], buff = .1)
+        framebox2 = SurroundingRectangle(text[3], buff = .1)
+        self.play(
+            ShowCreation(framebox1),
+        )
+        self.wait()
+        self.play(
+            ReplacementTransform(framebox1,framebox2),
+        )
+        self.wait()
+
+class Test(Scene):
+    def construct(self):
+        square = Square().set_fill(WHITE, opacity=1.0)
+        self.add(square)
+
+        self.play(ApplyMethod(square.set_fill, RED))
+        self.wait(1)
+
+        self.play(ApplyMethod(square.shift, UP))
+        self.wait(1)

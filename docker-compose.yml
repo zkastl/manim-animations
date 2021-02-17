@@ -7,7 +7,7 @@ services:
     volumes:
       - ./:/manim
 
-    command: "manim example.py OpeningManim"
+    command: "manim example.py Test -qh"
 
 volumes:
     manim-share:
